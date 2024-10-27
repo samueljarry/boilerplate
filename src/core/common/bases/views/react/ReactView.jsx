@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import { ViewsManager } from "@core/managers/ViewsManager";
+import { ViewsManager } from "@core/common/managers/ViewsManager";
 
 export const ReactView = ({ children, viewId, className = '' }) => {
   const ref = useRef();

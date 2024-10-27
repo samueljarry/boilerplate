@@ -1,5 +1,5 @@
-import { ViewBase } from "@core/bases/views/ViewBase";
-import { ViewTypes } from "@core/constants/views/ViewTypes";
+import { ViewBase } from "@core/common/bases/views/ViewBase";
+import { ViewTypes } from "@core/common/constants/views/ViewTypes";
 
 export class ReactViewBase extends ViewBase {
   #props = {};

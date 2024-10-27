@@ -1,8 +1,8 @@
 import '@styles/styles.scss';
 import { useEffect, useState } from 'react';
 import { Main } from './Main';
-import { ViewsManager } from './core/managers/ViewsManager';
-import { ViewTypes } from './core/constants/views/ViewTypes';
+import { ViewsManager } from './core/common/managers/ViewsManager';
+import { ViewTypes } from './core/common/constants/views/ViewTypes';
 
 export const App = () => {
   const [init, setInit] = useState(Main.IsInit);
@@ -16,7 +16,7 @@ export const App = () => {
 
     const onViewsChange = () => {
       let displayedViews = []
-      for(const view of ViewsManager.GetDisplayedViews()) {
+      for(const view of ViewsManager.GetDisplayedViews().values()) {
         if(view.type === ViewTypes.REACT) {
           displayedViews.push(<view.component viewId={view.viewId} key={view.viewId} />)
         }

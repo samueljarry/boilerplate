@@ -1,11 +1,15 @@
 import { ViewId } from "@constants/ViewId";
-import { InitCommandBase } from "@core/bases/commands/InitCommandBase";
-import { ViewLayer } from "@core/constants/views/ViewLayer";
-import { ViewsManager } from "@core/managers/ViewsManager";
-import { HelloWorldView } from "@views/HelloWorldView";
-import { ReactViewBase } from '@core/bases/views/react/ReactViewBase';
-import { TheatersManager } from "@core/managers/TheatersManager";
+import { InitCommandBase } from "@core/common/bases/commands/InitCommandBase";
+import { ViewLayer } from "@core/common/constants/views/ViewLayer";
+import { ViewsManager } from "@core/common/managers/ViewsManager";
+import { TheatersManager } from "@core/common/managers/TheatersManager";
 import { MainTheater } from "@theaters/MainTheater";
+import { MainThreeView } from "../core/three/views/MainThreeView";
+import { TestThreeView } from "../views/TestThreeView";
+import { CamerasManager } from "../core/three/managers/CamerasManager";
+import { DebugCameraController } from "../controllers/DebugCameraController";
+import { DummyCameraController } from "../controllers/DummyCameraController";
+import { ThreeAssetsManager } from "../core/three/managers/ThreeAssetsManager";
 
 export class InitCommand extends InitCommandBase {
   async init() {
@@ -16,14 +20,18 @@ export class InitCommand extends InitCommandBase {
   }
 
   async initManagers() {
+    CamerasManager.Init()
   }
 
   async initThree() {
+    ViewsManager.AddThreeView(ViewId.THREE_TEST, TestThreeView);
+
+    CamerasManager.AddCamera(new DebugCameraController());
+    CamerasManager.AddCamera(new DummyCameraController());
   }
 
   async initViews() {
-    ViewsManager.AddView(new ReactViewBase(ViewId.HELLO_WORLD, ViewLayer.MAIN, HelloWorldView));
-
+    ViewsManager.AddReactView(ViewId.MAIN_THREE, ViewLayer.MAIN_THREE, MainThreeView);
   }
 
   async initTheaters() {
@@ -31,5 +39,6 @@ export class InitCommand extends InitCommandBase {
   }
 
   async initAfterLoad() {
+    await ThreeAssetsManager.Load()
   }
 }

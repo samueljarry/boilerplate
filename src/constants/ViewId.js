@@ -1,4 +1,7 @@
 export const ViewId = {
-  HELLO_WORLD: 'HELLO_WORLD',
-  TEST_VIEW: 'TEST_VIEW',
+  NULL: null,
+
+  MAIN_THREE: 'MAIN_THREE',
+  
+  THREE_TEST: 'THREE_TEST',
 }

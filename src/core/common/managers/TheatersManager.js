@@ -1,4 +1,4 @@
-import { ViewsManager } from "@core/managers/ViewsManager";
+import { ViewsManager } from "@core/common/managers/ViewsManager";
 
 export class TheatersManager {
   /**
@@ -45,6 +45,10 @@ export class TheatersManager {
     this.TheatersMap.delete(theaterId)
   }
 
+  static GetTheater(theater) {
+    return this.TheatersMap(theater)
+  }
+
   /**
    * Show specified theater and his views
    * @param {TheaterId} theaterId
@@ -89,5 +93,7 @@ export class TheatersManager {
     for(const viewId of theater.siblingViewsList) {
       ViewsManager.Hide(viewId);
     }
+
+    this.DisplayedTheatersSet.delete(theaterId);
   }
 }

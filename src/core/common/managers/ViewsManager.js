@@ -1,4 +1,5 @@
-import { Action } from "@core/utils/Action";
+import { Action } from "@core/common/utils/Action";
+import { ReactViewBase } from "../bases/views/react/ReactViewBase";
 
 export class ViewsManager {
   static OnViewsChange = new Action();
@@ -12,8 +13,18 @@ export class ViewsManager {
    * @param {ViewBase} view
    * @returns {any}
    */
-  static async AddView(view) {
-    this.#ViewsMap.set(view.viewId, view);
+  static async AddReactView(viewId, viewLayer, view) {
+    this.#ViewsMap.set(viewId, new ReactViewBase(viewId, viewLayer, view));
+  }
+
+  /**
+   * Create Three.js view and add it to views list
+   * @param {viewId} viewId
+   * @param {ViewBase} view
+   * @returns {any}
+   */
+  static AddThreeView(viewId, view) {
+    this.#ViewsMap.set(viewId, new view())
   }
 
   /**
@@ -31,10 +42,11 @@ export class ViewsManager {
    * @returns {any}
    */
   static Show(viewId) {
-    const view = this.#ViewsMap.get(viewId);
-    const prevView = this.#LayerViewsMap.get(view.layer);
+    let view = this.#ViewsMap.get(viewId);
 
-    if(prevView) {
+    const prevView = this.#LayerViewsMap.get(view?.layer);
+
+    if(prevView && prevView.viewId) {
       this.Hide(prevView.viewId);
     }
 
@@ -68,6 +80,6 @@ export class ViewsManager {
   }
 
   static GetDisplayedViews() {
-    return this.#DisplayedViewsSet.values()
+    return new Set(this.#DisplayedViewsSet)
   }
 }

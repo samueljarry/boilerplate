@@ -1,7 +1,8 @@
 import { InitCommand } from "./commands/InitCommand";
 import { TheatersId } from "./constants/TheatersId";
-import { TheatersManager } from "./core/managers/TheatersManager";
-import { Action } from "./core/utils/Action";
+import { Ticker } from "./core/common/utils/Ticker";
+import { TheatersManager } from "./core/common/managers/TheatersManager";
+import { Action } from "./core/common/utils/Action";
 
 export class Main {
   static IsInit = false;
@@ -23,6 +24,7 @@ export class Main {
   }
 
   static Start() {
-    TheatersManager.Show(TheatersId.MAIN)
+    Ticker.Start();
+    TheatersManager.Show(TheatersId.MAIN);
   }
 }
