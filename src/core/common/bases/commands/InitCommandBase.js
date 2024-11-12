@@ -5,56 +5,48 @@ export class InitCommandBase {
     await this.initThree();
     await this.initViews();
     await this.initTheaters();
+    await this.initCommons();
     await this.loadAssets();
     await this.initAfterLoad();
   }
 
   /**
-   * Init all proxies 
-  */
-  async initProxies() {
-    
-  }
+   * Init all proxies
+   */
+  async initProxies() {}
 
   /**
    * Init all Managers
-  */
-  async initManagers() {
-    
-  }
+   */
+  async initManagers() {}
 
   /**
    * Init every Three.js related assets
-  */
-  async initThree() {
-    
-  }
+   */
+  async initThree() {}
+
+  /**
+   * Init every common assets
+   */
+  async initCommons() {}
 
   /**
    * Init all views
-  */
-  async initViews() {
-
-  }
+   */
+  async initViews() {}
 
   /**
    * Init theaters
-  */
-  async initTheaters() {
-
-  }
+   */
+  async initTheaters() {}
 
   /**
    * Load all assets added to queue
-  */
-  async loadAssets() {
-    
-  }
+   */
+  async loadAssets() {}
 
   /**
    * Init anything after everything is loaded
-  */
-  async initAfterLoad() {
-    
-  }
+   */
+  async initAfterLoad() {}
 }

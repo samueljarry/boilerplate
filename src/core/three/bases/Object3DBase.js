@@ -1,22 +1,33 @@
 import { Object3D } from "three";
-import { Ticker } from "../../common/utils/Ticker";
 
 export class Object3DBase extends Object3D {
   isExtendedObject3D = true;
-  
+
   constructor() {
     super();
   }
 
   init() {
-    if(typeof this.update === 'function') {
-      Ticker.Add(this.update)
+    for (const child of this.children) {
+      if (child.isExtendedObject3D) {
+        child.init();
+      }
     }
   }
 
   reset() {
-    if(typeof this.update === 'function') {
-      Ticker.Remove(this.update)
+    for (const child of this.children) {
+      if (child.isExtendedObject3D) {
+        child.reset();
+      }
     }
   }
+
+  update = (dt) => {
+    for (const child of this.children) {
+      if (child.isExtendedObject3D) {
+        child.update(dt);
+      }
+    }
+  };
 }
